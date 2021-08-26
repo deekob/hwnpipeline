@@ -5,7 +5,7 @@ import * as Hwnpipelines from '../lib/hwnpipelines-stack';
 test('Empty Stack', () => {
     const app = new cdk.App();
     // WHEN
-    const stack = new Hwnpipelines.HwnpipelinesStack(app, 'MyTestStack');
+    const stack = new Hwnpipelines.HWNPipelineStack(app, 'MyTestStack');
     // THEN
     expectCDK(stack).to(matchTemplate({
       "Resources": {}
