@@ -1,9 +1,16 @@
 import * as cdk from '@aws-cdk/core';
+import { CodePipeline, CodePipelineSource, ShellStep } from '@aws-cdk/pipelines';
 
-export class HwnpipelinesStack extends cdk.Stack {
+export class HWNPipelineStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const pipeline = new CodePipeline(this, 'Pipeline', {
+      pipelineName: 'HWNPipeline',
+      synth: new ShellStep('Synth', {
+        input: CodePipelineSource.gitHub('deekob/hwnpipeline', 'main'),
+        commands: ['npm ci', 'npm run build', 'npx cdk synth']
+      })
+    });
   }
 }
